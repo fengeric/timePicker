@@ -34,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
         try {
             // startActivity(new Intent(this, SingleChoicActivity.class));
             pickerUtil = new PickerUtil(MainActivity.this);
-            String[] arrayString = {"1", "2"};
+            /*String[] arrayString = {"1", "2"};
             pickerUtil.showSingleChooseDialog("选择定金金额", arrayString);
             pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
                 @Override
                 public void loadDataSuccess(String result) {
                     Log.v("lala", result);
                 }
-            });
+            });*/
         } catch (Exception e) {
             Log.e("lala", "btnNewActivity" + e.toString());
         }
