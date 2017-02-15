@@ -706,7 +706,7 @@ public class WheelView extends View {
 		// draw label
 		if (labelLayout != null) {
 			canvas.save();
-			canvas.translate(itemsLayout.getWidth() + LABEL_OFFSET, bounds.top);
+			canvas.translate(itemsLayout.getWidth() + LABEL_OFFSET, bounds.top + ADDITIONAL_ITEM_HEIGHT);
 			labelLayout.draw(canvas);
 			canvas.restore();
 		}
@@ -714,7 +714,7 @@ public class WheelView extends View {
 		// draw current value
 		if (valueLayout != null) {
 			canvas.save();
-			canvas.translate(0, bounds.top + scrollingOffset);
+			canvas.translate(0, bounds.top + scrollingOffset + ADDITIONAL_ITEM_HEIGHT);
 			valueLayout.draw(canvas);
 			canvas.restore();
 		}
@@ -728,7 +728,7 @@ public class WheelView extends View {
 		canvas.save();
 		
 		int top = itemsLayout.getLineTop(1);
-		canvas.translate(0, - top + scrollingOffset);
+		canvas.translate(0, - top + scrollingOffset + ADDITIONAL_ITEM_HEIGHT);
 		
 		itemsPaint.setColor(ITEMS_TEXT_COLOR);
 		itemsPaint.drawableState = getDrawableState();

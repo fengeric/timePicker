@@ -26,7 +26,7 @@ public class SingleChoicActivity extends Activity {
         wv = (WheelView) findViewById(R.id.wv_layout);
         wv.setVisibleItems(5);
         wv.setCyclic(false);
-        wv.setLabel("年");
+        //wv.setLabel("年");
 
 
         wv.setAdapter(new ArrayWheelAdapter<String>(arrayString));
