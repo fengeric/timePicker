@@ -24,7 +24,7 @@ public class SingleChoicActivity extends Activity {
         final String[] arrayString = {"是", "否"};
         tv = (TextView) findViewById(R.id.tv);
         wv = (WheelView) findViewById(R.id.wv_layout);
-        wv.setVisibleItems(3);
+        wv.setVisibleItems(5);
         wv.setCyclic(false);
         wv.setLabel("年");
 

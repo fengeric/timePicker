@@ -9,9 +9,9 @@
                 android:endColor="#ffffff"
                 android:startColor="#ffffff" />
 
-            <stroke
+            <!--<stroke
                 android:width="1px"
-                android:color="#ffcccccc" />
+                android:color="#ffcccccc" />-->
         </shape>
     </item>
     <item

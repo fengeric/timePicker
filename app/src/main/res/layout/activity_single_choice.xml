@@ -2,24 +2,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#181818"
     tools:context="com.umeng.test.SingleChoicActivity">
 
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ss"
         android:gravity="center"
-        android:textColor="#ff0000"
+        android:padding="10dp"
+        android:text="选择定金金额"
+        android:textColor="#ffffff"
         android:textSize="20sp" />
 
-    <com.umeng.test.time.WheelView
-        android:id="@+id/wv_layout"
+    <RelativeLayout
+        android:id="@+id/ss"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="220dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/white"
-        android:fadingEdge="none"
-        android:scrollbars="none" />
+        android:background="@android:color/white">
+
+        <com.umeng.test.time.WheelView
+            android:id="@+id/wv_layout"
+            android:layout_width="100dp"
+            android:layout_height="220dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:fadingEdge="none"
+            android:scrollbars="none" />
+    </RelativeLayout>
+
 
 </RelativeLayout>
