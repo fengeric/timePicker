@@ -57,10 +57,11 @@ public class MainActivity extends AppCompatActivity {
         dayWV.setLabel("日");
 //		hourWV.setLabel("");
 
-        yearWV.setCyclic(true);
+        // 设置能否循环滚动
+        yearWV.setCyclic(false);
         monthWV.setCyclic(true);
         dayWV.setCyclic(true);
-        hourWV.setCyclic(true);
+        hourWV.setCyclic(false);
         setData();
     }
 

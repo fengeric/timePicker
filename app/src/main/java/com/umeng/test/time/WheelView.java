@@ -32,7 +32,6 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.FloatMath;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -68,11 +67,11 @@ public class WheelView extends View {
 	private static final int[] SHADOWS_COLORS = new int[] { 0xFFffffff,
 			0x00eeeeee, 0x00eeeeee };
 
-	/** Additional items height (is added to standard text item height) */
-	private static final int ADDITIONAL_ITEM_HEIGHT = 15;
+	/** 高度Additional items height (is added to standard text item height) */
+	private static final int ADDITIONAL_ITEM_HEIGHT = 65;
 
-	/** Text size */
-	private static final int TEXT_SIZE = 30;
+	/** 文字大小Text size */
+	private static final int TEXT_SIZE = 40;
 
 	/** Top and bottom items offset (to hide that) */
 	private static final int ITEM_OFFSET = TEXT_SIZE / 5;
@@ -86,8 +85,8 @@ public class WheelView extends View {
 	/** Left and right padding value */
 	private static final int PADDING = 10;
 
-	/** Default count of visible items */
-	private static final int DEF_VISIBLE_ITEMS = 5;
+	/** 默认显示几行Default count of visible items */
+	private static final int DEF_VISIBLE_ITEMS = 3;
 
 	// Wheel Values
 	private WheelAdapter adapter = null;
@@ -934,7 +933,6 @@ public class WheelView extends View {
 	
 	/**
 	 * Scroll the wheel
-	 * @param itemsToSkip items to scroll
 	 * @param time scrolling duration
 	 */
 	public void scroll(int itemsToScroll, int time) {
