@@ -31,32 +31,36 @@ public class PickerUtil {
         inflater = LayoutInflater.from(context);
     }
 
-    public void showChooseDialog(String textTile, final String[] arrayString) {
-        View v = inflater.inflate(R.layout.activity_single_choice, null);
-        final TextView tv_single_choice_title = (TextView) v.findViewById(R.id.single_choice_title);// 标题
-        final WheelView wv_single_choice_wv_layout = (WheelView) v.findViewById(R.id.single_choice_wv_layout);// 选择控件
-        final TextView wv_single_choice_bt = (TextView) v.findViewById(R.id.single_choice_bt);// 确定按钮
-        wv_single_choice_wv_layout.setVisibleItems(5);// 设置每个滚轮的行数
-        wv_single_choice_wv_layout.setCyclic(false);// 设置能否循环滚动
-        //wv.setLabel("年");// 设置滚轮的标签
-        tv_single_choice_title.setText(textTile);
+    public void showSingleChooseDialog(String textTile, final String[] arrayString) {
+        try {
+            View v = inflater.inflate(R.layout.activity_single_choice, null);
+            final TextView tv_single_choice_title = (TextView) v.findViewById(R.id.single_choice_title);// 标题
+            final WheelView wv_single_choice_wv_layout = (WheelView) v.findViewById(R.id.single_choice_wv_layout);// 选择控件
+            final TextView wv_single_choice_bt = (TextView) v.findViewById(R.id.single_choice_bt);// 确定按钮
+            wv_single_choice_wv_layout.setVisibleItems(5);// 设置每个滚轮的行数
+            wv_single_choice_wv_layout.setCyclic(false);// 设置能否循环滚动
+            //wv.setLabel("年");// 设置滚轮的标签
+            tv_single_choice_title.setText(textTile);
 
-        wv_single_choice_wv_layout.setAdapter(new ArrayWheelAdapter<String>(arrayString));
-        wv_single_choice_wv_layout.addChangingListener(new OnWheelChangedListener() {
-            @Override
-            public void onChanged(WheelView wheel, int oldValue, int newValue) {
-                // tv.setText(arrayString[wv.getCurrentItem()]);
-                callBack.loadDataSuccess(arrayString[wv_single_choice_wv_layout.getCurrentItem()]);
-            }
-        });
-        wv_single_choice_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callBack.loadDataSuccess(arrayString[wv_single_choice_wv_layout.getCurrentItem()]);
-                dismissChooseDialog();
-            }
-        });
-        getChooseDialog(context, v);
+            wv_single_choice_wv_layout.setAdapter(new ArrayWheelAdapter<String>(arrayString));
+            wv_single_choice_wv_layout.addChangingListener(new OnWheelChangedListener() {
+                @Override
+                public void onChanged(WheelView wheel, int oldValue, int newValue) {
+                    // tv.setText(arrayString[wv.getCurrentItem()]);
+                    callBack.loadDataSuccess(arrayString[wv_single_choice_wv_layout.getCurrentItem()]);
+                }
+            });
+            wv_single_choice_bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callBack.loadDataSuccess(arrayString[wv_single_choice_wv_layout.getCurrentItem()]);
+                    dismissChooseDialog();
+                }
+            });
+            getChooseDialog(context, v);
+        } catch (Exception e) {
+            Log.e("lala", "showSingleChooseDialog" + e.toString());
+        }
     }
 
     /*
@@ -89,13 +93,12 @@ public class PickerUtil {
                 dialog.dismiss();
             }
         } catch (Exception e) {
-            Log.e("lala",
-                    "dismissChooseDialog" + e.toString());
+            Log.e("lala", "dismissChooseDialog" + e.toString());
         }
     }
 
     public interface loadDataCallBack {
-        public void loadDataSuccess(String result);// 此处返回的result，可以是其他类型的数值，布尔或Bean（UserInfo）文件等等
+        public void loadDataSuccess(String result);
     }
 
     public void setCallBack(loadDataCallBack callBack) {
