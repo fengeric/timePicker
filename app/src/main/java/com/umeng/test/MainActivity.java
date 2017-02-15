@@ -1,7 +1,10 @@
 package com.umeng.test;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 
 import com.umeng.test.time.ArrayWheelAdapter;
 import com.umeng.test.time.OnWheelChangedListener;
@@ -22,8 +25,16 @@ public class MainActivity extends AppCompatActivity {
     String[] yearArrayString = null;
     String[] dayArrayString = null;
     String[] monthArrayString = null;
-    String[] hourArrayString = {"上午","下午"};
+    String[] hourArrayString = {"上午", "下午"};
     Calendar c = null;
+
+    public void btnNewActivity(View v) {
+        try {
+            startActivity(new Intent(this, SingleChoicActivity.class));
+        } catch (Exception e) {
+            Log.e("lala", "btnNewActivity" + e.toString());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 根据数字生成一个字符串数组
     public String[] getHMArray(int day) {
-        String[] dayArr = {"上午","下午"};
+        String[] dayArr = {"上午", "下午"};
         return dayArr;
     }
 

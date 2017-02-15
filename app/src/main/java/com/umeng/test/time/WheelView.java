@@ -58,16 +58,16 @@ public class WheelView extends View {
 	private static final int MIN_DELTA_FOR_SCROLLING = 1;
 
 	/** Current value & label text color */
-	private static final int VALUE_TEXT_COLOR = 0xF0000000;
+	private static final int VALUE_TEXT_COLOR = 0xFF000000;
 
 	/** Items text color */
-	private static final int ITEMS_TEXT_COLOR = 0xF0cccccc;
+	private static final int ITEMS_TEXT_COLOR = 0xFFCCCCCC;
 
 	/** Top and bottom shadows colors */
 	private static final int[] SHADOWS_COLORS = new int[] { 0xFFffffff,
 			0x00eeeeee, 0x00eeeeee };
 
-	/** 高度Additional items height (is added to standard text item height) */
+	/** item高度Additional items height (is added to standard text item height) */
 	private static final int ADDITIONAL_ITEM_HEIGHT = 65;
 
 	/** 文字大小Text size */
@@ -128,7 +128,7 @@ public class WheelView extends View {
 	private Scroller scroller;
 	private int lastScrollY;
 
-	// Cyclic
+	// 能否循环滑动Cyclic
 	boolean isCyclic = false;
 	
 	// Listeners
@@ -434,7 +434,6 @@ public class WheelView extends View {
 
 		// Check against our minimum height
 		desired = Math.max(desired, getSuggestedMinimumHeight());
-
 		return desired;
 	}
 
