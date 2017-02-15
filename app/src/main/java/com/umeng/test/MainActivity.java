@@ -1,6 +1,5 @@
 package com.umeng.test;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +8,7 @@ import android.view.View;
 import com.umeng.test.time.ArrayWheelAdapter;
 import com.umeng.test.time.OnWheelChangedListener;
 import com.umeng.test.time.WheelView;
+import com.umeng.test.util.PickerUtil;
 
 import java.util.Calendar;
 
@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private WheelView monthWV = null;
     private WheelView dayWV = null;
     private WheelView hourWV = null;
+
+    private PickerUtil pickerUtil;
 
     int year;
     int month;
@@ -30,7 +32,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnNewActivity(View v) {
         try {
-            startActivity(new Intent(this, SingleChoicActivity.class));
+            // startActivity(new Intent(this, SingleChoicActivity.class));
+            pickerUtil = new PickerUtil(MainActivity.this);
+            String[] arrayString = {"1", "2"};
+            pickerUtil.showChooseDialog("选择定金金额", arrayString);
+            pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
+                @Override
+                public void loadDataSuccess(String result) {
+                    Log.v("lala", result);
+                }
+            });
         } catch (Exception e) {
             Log.e("lala", "btnNewActivity" + e.toString());
         }

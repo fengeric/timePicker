@@ -1,30 +1,31 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#181818"
+    android:orientation="vertical"
     tools:context="com.umeng.test.SingleChoicActivity">
 
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/single_choice_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ss"
+        android:layout_gravity="center_horizontal"
+        android:background="#ff0000"
         android:gravity="center"
-        android:padding="10dp"
-        android:text="选择定金金额"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <RelativeLayout
-        android:id="@+id/ss"
+        android:id="@+id/single_choice_rl_layout"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/white">
 
         <com.umeng.test.time.WheelView
-            android:id="@+id/wv_layout"
+            android:id="@+id/single_choice_wv_layout"
             android:layout_width="100dp"
             android:layout_height="220dp"
             android:layout_alignParentBottom="true"
@@ -33,5 +34,18 @@
             android:scrollbars="none" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/single_choice_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#e68a1d"
+        android:clickable="true"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="确定"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
-</RelativeLayout>
+</LinearLayout>
