@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             // startActivity(new Intent(this, SingleChoicActivity.class));
             pickerUtil = new PickerUtil(MainActivity.this);
-            pickerUtil.showThreeChooseDialog("预计开工时间");
+            pickerUtil.showThreeChooseDialog("预计开工时间", false);
             pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
                 @Override
                 public void loadDataSuccess(String result) {
@@ -84,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnFourChoiceActivity(View v) {
         try {
+            pickerUtil = new PickerUtil(MainActivity.this);
+            pickerUtil.showThreeChooseDialog("预计开工时间", true);
+            pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
+                @Override
+                public void loadDataSuccess(String result) {
+                    Toast.makeText(MainActivity.this, result ,Toast.LENGTH_LONG).show();
+                }
+            });
         } catch (Exception e) {
             Log.e("lala", "btnFourChoiceActivity" + e.toString());
         }

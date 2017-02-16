@@ -31,7 +31,7 @@ public class PickerUtil {
     String[] yearArrayString = null;
     String[] dayArrayString = null;
     String[] monthArrayString = null;
-    // String[] hourArrayString = null;
+    String[] hourArrayString = null;
     Calendar c = null;
     private WheelView choice_wv_layout1 ;// 选择控件1,年
     private WheelView choice_wv_layout2 ;// 选择控件2,月
@@ -39,6 +39,7 @@ public class PickerUtil {
     private WheelView choice_wv_layout4 ;// 选择控件4,时
     int year;
     int month;
+    private boolean isShowHour = false;// 是否需要展示时间(默认不展示)
 
     public PickerUtil(Context context) {
         this.context = context;
@@ -118,11 +119,20 @@ public class PickerUtil {
         }
     }
 
-    public void showThreeChooseDialog(String textTile){
+    public void showThreeChooseDialog(String textTile, final boolean isShowHour){
         try {
+            this.isShowHour = isShowHour;
             // 获取当前系统时间
             c = Calendar.getInstance();
-            View v = inflater.inflate(R.layout.activity_three_choice, null);
+            View v = null;
+            if (isShowHour) {
+                v = inflater.inflate(R.layout.activity_four_choice, null);
+                choice_wv_layout4= (WheelView) v.findViewById(R.id.choice_wv_layout4);// 选择控件4
+                choice_wv_layout4.setLabel("时");// 设置滚轮的标签
+            } else {
+                v = inflater.inflate(R.layout.activity_three_choice, null);
+            }
+
             final TextView tv_title = (TextView) v.findViewById(R.id.choice_title);// 标题
             tv_title.setText(textTile);
             choice_wv_layout1 = (WheelView) v.findViewById(R.id.choice_wv_layout1);// 选择控件1
@@ -138,12 +148,15 @@ public class PickerUtil {
             // 得到相应的数组
             yearArrayString = getYEARArray(2010, 20);
             monthArrayString = getDayArray(12);
-            dayArrayString = getDayArray(24);
+            dayArrayString = getDayArray(30);
+            hourArrayString = getDayArray(24);
 
             choice_wv_layout1.setAdapter(new ArrayWheelAdapter<String>(yearArrayString));// 添加年数据
             choice_wv_layout2.setAdapter(new ArrayWheelAdapter<String>(monthArrayString));// 添加月数据
             choice_wv_layout3.setAdapter(new ArrayWheelAdapter<String>(dayArrayString));// 添加日数据
-
+            if (choice_wv_layout4 != null) {
+                choice_wv_layout4.setAdapter(new ArrayWheelAdapter<String>(hourArrayString));// 添加时数据
+            }
             choice_wv_layout1.addChangingListener(new OnWheelChangedListener() {
                 @Override
                 public void onChanged(WheelView wheel, int oldValue, int newValue) {
@@ -193,7 +206,7 @@ public class PickerUtil {
             choice_bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showDate();
+                    showDate(isShowHour);
                     dismissChooseDialog();
                 }
             });
@@ -204,10 +217,16 @@ public class PickerUtil {
     }
 
     // 显示时间
-    void showDate() {
-        createDate(yearArrayString[choice_wv_layout1.getCurrentItem()],
-                monthArrayString[choice_wv_layout2.getCurrentItem()],
-                dayArrayString[choice_wv_layout3.getCurrentItem()]);
+    void showDate(boolean isShowHour) {
+        if (isShowHour) {
+            createDateWithHour(yearArrayString[choice_wv_layout1.getCurrentItem()],
+                    monthArrayString[choice_wv_layout2.getCurrentItem()],
+                    dayArrayString[choice_wv_layout3.getCurrentItem()], hourArrayString[choice_wv_layout4.getCurrentItem()]);
+        } else {
+            createDate(yearArrayString[choice_wv_layout1.getCurrentItem()],
+                    monthArrayString[choice_wv_layout2.getCurrentItem()],
+                    dayArrayString[choice_wv_layout3.getCurrentItem()]);
+        }
     }
 
     // 设定初始时间
@@ -226,11 +245,21 @@ public class PickerUtil {
             choice_wv_layout3.setCurrentItem(getNumData(c.get(Calendar.DAY_OF_MONTH) + "",
                     dayArrayString));
         }
+        if (choice_wv_layout4 != null) {
+            choice_wv_layout4.setCurrentItem(getNumData(c.get(Calendar.HOUR_OF_DAY) + "",
+                    hourArrayString));
+        }
     }
 
     // 生成时间
     void createDate(String year, String month, String day) {
         String dateStr = year + "年" + month + "月" + day + "日";
+        callBack.loadDataSuccess(dateStr);
+    }
+
+    // 生成时间
+    void createDateWithHour(String year, String month, String day, String hour) {
+        String dateStr = year + "年" + month + "月" + day + "日" + hour + "时";
         callBack.loadDataSuccess(dateStr);
     }
 
