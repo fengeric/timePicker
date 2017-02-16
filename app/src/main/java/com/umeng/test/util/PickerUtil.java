@@ -33,13 +33,12 @@ public class PickerUtil {
     String[] monthArrayString = null;
     String[] hourArrayString = null;
     Calendar c = null;
-    private WheelView choice_wv_layout1 ;// 选择控件1,年
-    private WheelView choice_wv_layout2 ;// 选择控件2,月
-    private WheelView choice_wv_layout3 ;// 选择控件3,日
-    private WheelView choice_wv_layout4 ;// 选择控件4,时
+    private WheelView choice_wv_layout1;// 选择控件1,年
+    private WheelView choice_wv_layout2;// 选择控件2,月
+    private WheelView choice_wv_layout3;// 选择控件3,日
+    private WheelView choice_wv_layout4;// 选择控件4,时
     int year;
     int month;
-    private boolean isShowHour = false;// 是否需要展示时间(默认不展示)
 
     public PickerUtil(Context context) {
         this.context = context;
@@ -78,7 +77,7 @@ public class PickerUtil {
         }
     }
 
-    public void showTwoChooseDialog(String textTile, final String[] arrayString1, final String[][]arrayString2) {
+    public void showTwoChooseDialog(String textTile, final String[] arrayString1, final String[][] arrayString2) {
         try {
             View v = inflater.inflate(R.layout.activity_double_choice, null);
             final TextView tv_title = (TextView) v.findViewById(R.id.choice_title);// 标题
@@ -119,15 +118,14 @@ public class PickerUtil {
         }
     }
 
-    public void showThreeChooseDialog(String textTile, final boolean isShowHour){
+    public void showThreeChooseDialog(String textTile, final boolean isShowHour) {
         try {
-            this.isShowHour = isShowHour;
             // 获取当前系统时间
             c = Calendar.getInstance();
             View v = null;
             if (isShowHour) {
                 v = inflater.inflate(R.layout.activity_four_choice, null);
-                choice_wv_layout4= (WheelView) v.findViewById(R.id.choice_wv_layout4);// 选择控件4
+                choice_wv_layout4 = (WheelView) v.findViewById(R.id.choice_wv_layout4);// 选择控件4
                 choice_wv_layout4.setLabel("时");// 设置滚轮的标签
             } else {
                 v = inflater.inflate(R.layout.activity_three_choice, null);
@@ -137,7 +135,7 @@ public class PickerUtil {
             tv_title.setText(textTile);
             choice_wv_layout1 = (WheelView) v.findViewById(R.id.choice_wv_layout1);// 选择控件1
             choice_wv_layout2 = (WheelView) v.findViewById(R.id.choice_wv_layout2);// 选择控件2
-            choice_wv_layout3= (WheelView) v.findViewById(R.id.choice_wv_layout3);// 选择控件3
+            choice_wv_layout3 = (WheelView) v.findViewById(R.id.choice_wv_layout3);// 选择控件3
             final TextView choice_bt = (TextView) v.findViewById(R.id.choice_bt);// 确定按钮
             // wv_single_choice_wv_layout.setVisibleItems(5);// 设置每个滚轮的行数
             // wv_single_choice_wv_layout.setCyclic(false);// 设置能否循环滚动
@@ -173,8 +171,6 @@ public class PickerUtil {
                     if (choice_wv_layout3.getCurrentItem() >= dayArrayString.length) {
                         choice_wv_layout3.setCurrentItem(dayArrayString.length - 1);
                     }
-                    // 显示的时间
-                    // showDate();
                 }
             });
 
@@ -196,12 +192,10 @@ public class PickerUtil {
                     if (choice_wv_layout3.getCurrentItem() >= dayArrayString.length) {
                         choice_wv_layout3.setCurrentItem(dayArrayString.length - 1);
                     }
-                    // 显示的时间
-                    // showDate();
                 }
             });
             // 把当前系统时间显示为滚轮默认时间
-            setOriTime();
+            setDefTime();
 
             choice_bt.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -230,7 +224,7 @@ public class PickerUtil {
     }
 
     // 设定初始时间
-    void setOriTime() {
+    void setDefTime() {
         if (choice_wv_layout1 != null) {
             choice_wv_layout1.setCurrentItem(getNumData(c.get(Calendar.YEAR) + "",
                     yearArrayString));
@@ -309,12 +303,6 @@ public class PickerUtil {
         return dayArr;
     }
 
-    // 根据数字生成一个字符串数组
-    public String[] getHMArray(int day) {
-        String[] dayArr = {"上午", "下午"};
-        return dayArr;
-    }
-
     // 根据初始值start和step得到一个字符数组，自start起至start+step-1
     public String[] getYEARArray(int start, int step) {
         String[] dayArr = new String[step];
@@ -323,7 +311,6 @@ public class PickerUtil {
         }
         return dayArr;
     }
-
 
     /*
  * 弹出dialog

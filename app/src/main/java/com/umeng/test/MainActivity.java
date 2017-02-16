@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
                 @Override
                 public void loadDataSuccess(String result) {
-                    Toast.makeText(MainActivity.this, result ,Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
                 }
             });
         } catch (Exception e) {
@@ -52,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
         try {
             // startActivity(new Intent(this, SingleChoicActivity.class));
             pickerUtil = new PickerUtil(MainActivity.this);
-            String[] arrayString1 = {"上海市","江苏省","浙江省"};
-            String[][] arrayString2 = {{"黄浦区","卢湾区","徐汇区","长宁区","静安区","普陀区","闸北区","虹口区","杨浦区","闵行区","宝山区","浦东新区","嘉定区"},{"苏州","无锡","启东"},{"杭州","宁波","嘉兴"}};
-            pickerUtil.showTwoChooseDialog("选择区域",arrayString1, arrayString2);
+            String[] arrayString1 = {"上海市", "江苏省", "浙江省"};
+            String[][] arrayString2 = {{"黄浦区", "卢湾区", "徐汇区", "长宁区", "静安区", "普陀区", "闸北区", "虹口区", "杨浦区", "闵行区", "宝山区", "浦东新区", "嘉定区"}, {"苏州", "无锡", "启东"}, {"杭州", "宁波", "嘉兴"}};
+            pickerUtil.showTwoChooseDialog("选择区域", arrayString1, arrayString2);
             pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
                 @Override
                 public void loadDataSuccess(String result) {
-                    Toast.makeText(MainActivity.this, result ,Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
                 }
             });
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
                 @Override
                 public void loadDataSuccess(String result) {
-                    Toast.makeText(MainActivity.this, result ,Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
                 }
             });
         } catch (Exception e) {
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
                 @Override
                 public void loadDataSuccess(String result) {
-                    Toast.makeText(MainActivity.this, result ,Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
                 }
             });
         } catch (Exception e) {
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         yearWV.setLabel("年");
         monthWV.setLabel("月");
         dayWV.setLabel("日");
-		hourWV.setLabel("时");
+        hourWV.setLabel("时");
 
         // 设置能否循环滚动
         yearWV.setCyclic(false);
