@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.umeng.test.time.ArrayWheelAdapter;
 import com.umeng.test.time.OnWheelChangedListener;
@@ -30,29 +31,38 @@ public class MainActivity extends AppCompatActivity {
     String[] hourArrayString = {"上午", "下午"};
     Calendar c = null;
 
-    public void btnNewActivity(View v) {
+    public void btnSingleChoiceActivity(View v) {
         try {
             // startActivity(new Intent(this, SingleChoicActivity.class));
             pickerUtil = new PickerUtil(MainActivity.this);
-            /*String[] arrayString = {"1", "2"};
+            String[] arrayString = {"1", "2"};
             pickerUtil.showSingleChooseDialog("选择定金金额", arrayString);
             pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
                 @Override
                 public void loadDataSuccess(String result) {
-                    Log.v("lala", result);
+                    Toast.makeText(MainActivity.this, result ,Toast.LENGTH_LONG).show();
                 }
-            });*/
+            });
+        } catch (Exception e) {
+            Log.e("lala", "btnSingleChoiceActivity" + e.toString());
+        }
+    }
+
+    public void btnDoubleChoiceActivity(View v) {
+        try {
+            // startActivity(new Intent(this, SingleChoicActivity.class));
+            pickerUtil = new PickerUtil(MainActivity.this);
             String[] arrayString1 = {"上海市","江苏省","浙江省"};
             String[][] arrayString2 = {{"黄浦区","卢湾区","徐汇区","长宁区","静安区","普陀区","闸北区","虹口区","杨浦区","闵行区","宝山区","浦东新区","嘉定区"},{"苏州","无锡","启东"},{"杭州","宁波","嘉兴"}};
             pickerUtil.showTwoChooseDialog("选择区域",arrayString1, arrayString2);
             pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
                 @Override
                 public void loadDataSuccess(String result) {
-                    Log.v("lala", result);
+                    Toast.makeText(MainActivity.this, result ,Toast.LENGTH_LONG).show();
                 }
             });
         } catch (Exception e) {
-            Log.e("lala", "btnNewActivity" + e.toString());
+            Log.e("lala", "btnDoubleChoiceActivity" + e.toString());
         }
     }
 

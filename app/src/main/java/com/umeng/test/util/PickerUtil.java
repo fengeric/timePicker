@@ -47,7 +47,7 @@ public class PickerUtil {
                 @Override
                 public void onChanged(WheelView wheel, int oldValue, int newValue) {
                     // tv.setText(arrayString[wv.getCurrentItem()]);
-                    callBack.loadDataSuccess(arrayString[wv_single_choice_wv_layout.getCurrentItem()]);
+                    // callBack.loadDataSuccess(arrayString[wv_single_choice_wv_layout.getCurrentItem()]);
                 }
             });
             wv_single_choice_bt.setOnClickListener(new View.OnClickListener() {
