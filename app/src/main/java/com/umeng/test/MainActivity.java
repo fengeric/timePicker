@@ -99,6 +99,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnFiveChoiceActivity(View v) {
         try {
+            String[] array = {"1","2","3","4","5","6","7","8","9","10"};
+            pickerUtil = new PickerUtil(MainActivity.this);
+            pickerUtil.showFiveChooseDialog("选择房型", array);
+            pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
+                @Override
+                public void loadDataSuccess(String result) {
+                    Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
+                }
+            });
         } catch (Exception e) {
             Log.e("lala", "btnFiveChoiceActivity" + e.toString());
         }

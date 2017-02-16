@@ -210,6 +210,50 @@ public class PickerUtil {
         }
     }
 
+    public void showFiveChooseDialog(String textTile, final String[] arrayContent) {
+        try {
+            View v = inflater.inflate(R.layout.activity_five_choice, null);
+
+            final TextView tv_title = (TextView) v.findViewById(R.id.choice_title);// 标题
+            tv_title.setText(textTile);
+            final WheelView choice_wv_layout1 = (WheelView) v.findViewById(R.id.choice_wv_layout1);// 选择控件1
+            final WheelView choice_wv_layout2 = (WheelView) v.findViewById(R.id.choice_wv_layout2);// 选择控件2
+            final WheelView choice_wv_layout3 = (WheelView) v.findViewById(R.id.choice_wv_layout3);// 选择控件3
+            final WheelView choice_wv_layout4 = (WheelView) v.findViewById(R.id.choice_wv_layout4);// 选择控件4
+            final WheelView choice_wv_layout5 = (WheelView) v.findViewById(R.id.choice_wv_layout5);// 选择控件5
+            final TextView choice_bt = (TextView) v.findViewById(R.id.choice_bt);// 确定按钮
+            // wv_single_choice_wv_layout.setVisibleItems(5);// 设置每个滚轮的行数
+            // wv_single_choice_wv_layout.setCyclic(false);// 设置能否循环滚动
+            choice_wv_layout1.setLabel("房间");
+            choice_wv_layout2.setLabel("客厅");
+            choice_wv_layout3.setLabel("厨房");
+            choice_wv_layout4.setLabel("卫生间");
+            choice_wv_layout5.setLabel("阳台");
+
+            choice_wv_layout1.setAdapter(new ArrayWheelAdapter<String>(arrayContent));
+            choice_wv_layout2.setAdapter(new ArrayWheelAdapter<String>(arrayContent));
+            choice_wv_layout3.setAdapter(new ArrayWheelAdapter<String>(arrayContent));
+            choice_wv_layout4.setAdapter(new ArrayWheelAdapter<String>(arrayContent));
+            choice_wv_layout5.setAdapter(new ArrayWheelAdapter<String>(arrayContent));
+
+            choice_bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callBack.loadDataSuccess(arrayContent[choice_wv_layout1.getCurrentItem()] + "房间" +
+                            arrayContent[choice_wv_layout2.getCurrentItem()] + "客厅" +
+                            arrayContent[choice_wv_layout3.getCurrentItem()] + "厨房" +
+                            arrayContent[choice_wv_layout4.getCurrentItem()] + "卫生间" +
+                            arrayContent[choice_wv_layout5.getCurrentItem()] + "阳台"
+                    );
+                    dismissChooseDialog();
+                }
+            });
+            getChooseDialog(context, v);
+        } catch (Exception e) {
+            Log.e("lala", "showFiveChooseDialog" + e.toString());
+        }
+    }
+
     // 显示时间
     void showDate(boolean isShowHour) {
         if (isShowHour) {
