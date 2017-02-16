@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
     // 滚轮上的数据，字符串数组
     String[] yearArrayString = null;
-    String[] dayArrayString = null;
     String[] monthArrayString = null;
-    String[] hourArrayString = {"上午", "下午"};
+    String[] dayArrayString = null;
+    String[] hourArrayString = null;
     Calendar c = null;
 
     public void btnSingleChoiceActivity(View v) {
@@ -66,6 +66,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void btnThreeChoiceActivity(View v) {
+        try {
+            // startActivity(new Intent(this, SingleChoicActivity.class));
+            pickerUtil = new PickerUtil(MainActivity.this);
+            pickerUtil.showThreeChooseDialog("预计开工时间");
+            pickerUtil.setCallBack(new PickerUtil.loadDataCallBack() {
+                @Override
+                public void loadDataSuccess(String result) {
+                    Toast.makeText(MainActivity.this, result ,Toast.LENGTH_LONG).show();
+                }
+            });
+        } catch (Exception e) {
+            Log.e("lala", "btnThreeChoiceActivity" + e.toString());
+        }
+    }
+
+    public void btnFourChoiceActivity(View v) {
+        try {
+        } catch (Exception e) {
+            Log.e("lala", "btnFourChoiceActivity" + e.toString());
+        }
+    }
+
+    public void btnFiveChoiceActivity(View v) {
+        try {
+        } catch (Exception e) {
+            Log.e("lala", "btnFiveChoiceActivity" + e.toString());
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         // 得到相应的数组
         yearArrayString = getYEARArray(2010, 19);
         monthArrayString = getDayArray(12);
+        hourArrayString = getDayArray(24);
 
         // 获取当前系统时间
         c = Calendar.getInstance();
@@ -96,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         yearWV.setLabel("年");
         monthWV.setLabel("月");
         dayWV.setLabel("日");
-//		hourWV.setLabel("");
+		hourWV.setLabel("时");
 
         // 设置能否循环滚动
         yearWV.setCyclic(false);
