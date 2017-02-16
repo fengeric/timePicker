@@ -25,9 +25,6 @@ public class PickerUtil {
     private LayoutInflater inflater;
     private loadDataCallBack callBack;
     private Dialog dialog = null;
-    String arrayContent[] = null;
-    String text_first_content;
-    String text_second_content;
 
     public PickerUtil(Context context) {
         this.context = context;
@@ -68,9 +65,6 @@ public class PickerUtil {
 
     public void showTwoChooseDialog(String textTile, final String[] arrayString1, final String[][]arrayString2) {
         try {
-            arrayContent = arrayString2[0];
-            text_first_content = arrayString1[0];
-            text_second_content = arrayString2[0][0];
             View v = inflater.inflate(R.layout.activity_double_choice, null);
             final TextView tv_title = (TextView) v.findViewById(R.id.choice_title);// 标题
             final WheelView choice_wv_layout1 = (WheelView) v.findViewById(R.id.choice_wv_layout1);// 选择控件1
@@ -81,31 +75,26 @@ public class PickerUtil {
             // wv.setLabel("年");// 设置滚轮的标签
             tv_title.setText(textTile);
 
-            choice_wv_layout1.setAdapter(new ArrayWheelAdapter<String>(arrayString1));
+            choice_wv_layout1.setAdapter(new ArrayWheelAdapter<String>(arrayString1));// 默认显示数组中的第一个集合
             choice_wv_layout1.addChangingListener(new OnWheelChangedListener() {
                 @Override
                 public void onChanged(WheelView wheel, int oldValue, int newValue) {
-                    arrayContent = arrayString2[choice_wv_layout1.getCurrentItem()];// 设置第二个选项里的内容
-                    text_first_content = arrayString1[choice_wv_layout1.getCurrentItem()];// 获取第一个选项里的文字
-                    choice_wv_layout2.setAdapter(new ArrayWheelAdapter<String>(arrayContent));
-                    if (choice_wv_layout2.getCurrentItem() > arrayContent.length) {// 如果第二项选择框选中的position大于内容的长度，设置显示最后一个文字(切换第一项选择框会导致这个问题)
-                        choice_wv_layout2.setCurrentItem(arrayContent.length - 1);
+                    choice_wv_layout2.setAdapter(new ArrayWheelAdapter<String>(arrayString2[choice_wv_layout1.getCurrentItem()]));// 设置第二个选项里的内容
+                    if (choice_wv_layout2.getCurrentItem() > arrayString2[choice_wv_layout1.getCurrentItem()].length) {// 如果第二项选择框选中的position大于内容的长度，设置显示最后一个文字(切换第一项选择框会导致这个问题)
+                        choice_wv_layout2.setCurrentItem(arrayString2[choice_wv_layout1.getCurrentItem()].length - 1);
                     }
                 }
             });
-            choice_wv_layout2.setAdapter(new ArrayWheelAdapter<String>(arrayContent));
+            choice_wv_layout2.setAdapter(new ArrayWheelAdapter<String>(arrayString2[0]));
             choice_wv_layout2.addChangingListener(new OnWheelChangedListener() {
                 @Override
                 public void onChanged(WheelView wheel, int oldValue, int newValue) {
-                    // tv.setText(arrayString[wv.getCurrentItem()]);
-                    //callBack.loadDataSuccess(arrayString[choice_wv_layout2.getCurrentItem()]);
-                    text_second_content = arrayContent[choice_wv_layout2.getCurrentItem()];
                 }
             });
             choice_bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callBack.loadDataSuccess(text_first_content + text_second_content);
+                    callBack.loadDataSuccess(arrayString1[choice_wv_layout1.getCurrentItem()] + arrayString2[choice_wv_layout1.getCurrentItem()][choice_wv_layout2.getCurrentItem()]);
                     dismissChooseDialog();
                 }
             });
