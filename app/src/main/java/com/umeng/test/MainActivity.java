@@ -112,6 +112,20 @@ public class MainActivity extends AppCompatActivity {
             Log.e("lala", "btnFiveChoiceActivity" + e.toString());
         }
     }
+    public void showTipDialog(View v) {
+        try {
+            pickerUtil = new PickerUtil(MainActivity.this);
+            pickerUtil.showTipDialog(this, "确认保存吗？");
+            pickerUtil.setCallBack(new PickerUtil.pressBtCallBack() {
+                @Override
+                public void pressSuccess(boolean isPressYes) {
+                    Toast.makeText(MainActivity.this, isPressYes + "", Toast.LENGTH_LONG).show();
+                }
+            });
+        } catch (Exception e) {
+            Log.e("lala", "showTipDialog" + e.toString());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

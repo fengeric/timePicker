@@ -1,5 +1,6 @@
 package com.umeng.test.util;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
@@ -26,6 +27,7 @@ public class PickerUtil {
     private Context context;
     private LayoutInflater inflater;
     private loadDataCallBack callBack;
+    private pressBtCallBack pressCallBack;
     private Dialog dialog = null;
     // 滚轮上的数据，字符串数组
     String[] yearArrayString = null;
@@ -254,6 +256,45 @@ public class PickerUtil {
         }
     }
 
+    public void showTipDialog(Context context, String textTile) {
+        try {
+            final AlertDialog dialog = new AlertDialog.Builder(
+                    context,
+                    AlertDialog.THEME_HOLO_LIGHT).create();
+
+            View v = inflater.inflate(R.layout.activity_tip_dialog, null);
+
+            final TextView tip_title = (TextView) v.findViewById(R.id.tip_title);// 标题
+            tip_title.setText(textTile);
+            final TextView tip_yes = (TextView) v.findViewById(R.id.tip_yes);// 确定按钮
+            final TextView tip_no = (TextView) v.findViewById(R.id.tip_no);// 返回按钮
+
+            tip_yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pressCallBack.pressSuccess(true);
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                }
+            });
+            tip_no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pressCallBack.pressSuccess(false);
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                }
+            });
+
+            dialog.setView(v);
+            dialog.show();;
+        } catch (Exception e) {
+            Log.e("lala", "showTipDialog" + e.toString());
+        }
+    }
+
     // 显示时间
     void showDate(boolean isShowHour) {
         if (isShowHour) {
@@ -396,5 +437,13 @@ public class PickerUtil {
 
     public void setCallBack(loadDataCallBack callBack) {
         this.callBack = callBack;
+    }
+
+    public interface pressBtCallBack {
+        public void pressSuccess(boolean isPressYes);
+    }
+
+    public void setCallBack(pressBtCallBack callBack) {
+        this.pressCallBack = callBack;
     }
 }
