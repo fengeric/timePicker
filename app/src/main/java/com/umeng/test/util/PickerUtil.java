@@ -66,13 +66,13 @@ public class PickerUtil {
         }
     }
 
-    public void showTwoChooseDialog(String textTile, final String[] arrayString1, final String[] arrayString2,final String[] arrayStringArea) {
+    public void showTwoChooseDialog(String textTile, final String[] arrayString1, final String[][]arrayString2) {
         try {
-            arrayContent = arrayString1;
-            text_first_content = arrayStringArea[0];
-            text_second_content = arrayString1[0];
+            arrayContent = arrayString2[0];
+            text_first_content = arrayString1[0];
+            text_second_content = arrayString2[0][0];
             View v = inflater.inflate(R.layout.activity_double_choice, null);
-            final TextView tv_title = (TextView) v.findViewById(R.id.single_choice_title);// 标题
+            final TextView tv_title = (TextView) v.findViewById(R.id.choice_title);// 标题
             final WheelView choice_wv_layout1 = (WheelView) v.findViewById(R.id.choice_wv_layout1);// 选择控件1
             final WheelView choice_wv_layout2 = (WheelView) v.findViewById(R.id.choice_wv_layout2);// 选择控件2
             final TextView choice_bt = (TextView) v.findViewById(R.id.choice_bt);// 确定按钮
@@ -81,19 +81,15 @@ public class PickerUtil {
             // wv.setLabel("年");// 设置滚轮的标签
             tv_title.setText(textTile);
 
-            choice_wv_layout1.setAdapter(new ArrayWheelAdapter<String>(arrayStringArea));
+            choice_wv_layout1.setAdapter(new ArrayWheelAdapter<String>(arrayString1));
             choice_wv_layout1.addChangingListener(new OnWheelChangedListener() {
                 @Override
                 public void onChanged(WheelView wheel, int oldValue, int newValue) {
-                    // tv.setText(arrayString[wv.getCurrentItem()]);
-                    //callBack.loadDataSuccess(arrayString[choice_wv_layout1.getCurrentItem()]);
-                    String chooseText = arrayStringArea[choice_wv_layout1.getCurrentItem()];
-                    if (chooseText.equals("上海")) {
-                        arrayContent = arrayString1;
-                        text_first_content = "上海";
-                    } else if (chooseText.equals("周边")) {
-                        arrayContent = arrayString2;
-                        text_first_content = "周边";
+                    arrayContent = arrayString2[choice_wv_layout1.getCurrentItem()];// 设置第二个选项里的内容
+                    text_first_content = arrayString1[choice_wv_layout1.getCurrentItem()];// 获取第一个选项里的文字
+                    choice_wv_layout2.setAdapter(new ArrayWheelAdapter<String>(arrayContent));
+                    if (choice_wv_layout2.getCurrentItem() > arrayContent.length) {// 如果第二项选择框选中的position大于内容的长度，设置显示最后一个文字(切换第一项选择框会导致这个问题)
+                        choice_wv_layout2.setCurrentItem(arrayContent.length - 1);
                     }
                 }
             });
@@ -115,7 +111,7 @@ public class PickerUtil {
             });
             getChooseDialog(context, v);
         } catch (Exception e) {
-            Log.e("lala", "showSingleChooseDialog" + e.toString());
+            Log.e("lala", "showTwoChooseDialog" + e.toString());
         }
     }
 
