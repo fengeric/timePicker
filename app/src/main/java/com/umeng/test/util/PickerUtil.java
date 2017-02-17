@@ -259,8 +259,7 @@ public class PickerUtil {
     public void showTipDialog(Context context, String textTile) {
         try {
             final AlertDialog dialog = new AlertDialog.Builder(
-                    context,
-                    AlertDialog.THEME_HOLO_LIGHT).create();
+                    context, R.style.myTipDialogStyle).create();
 
             View v = inflater.inflate(R.layout.activity_tip_dialog, null);
 
