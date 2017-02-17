@@ -14,6 +14,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <Button
+                android:layout_width="match_parent"
+                android:onClick="btnOnclick"
+                android:layout_height="wrap_content" />
+
             <com.umeng.test.view.MyGridView
                 android:id="@+id/gridview_display_image"
                 android:layout_width="wrap_content"
