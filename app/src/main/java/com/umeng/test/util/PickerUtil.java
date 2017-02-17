@@ -46,6 +46,10 @@ public class PickerUtil {
         inflater = LayoutInflater.from(context);
     }
 
+    /**@title 展示单选框
+     * @params 
+     * @return type 
+     **/
     public void showSingleChooseDialog(String textTile, final String[] arrayString) {
         try {
             View v = inflater.inflate(R.layout.activity_single_choice, null);
@@ -78,6 +82,10 @@ public class PickerUtil {
         }
     }
 
+    /**@title 双选框
+     * @params 
+     * @return type 
+     **/
     public void showTwoChooseDialog(String textTile, final String[] arrayString1, final String[][] arrayString2) {
         try {
             View v = inflater.inflate(R.layout.activity_double_choice, null);
@@ -119,6 +127,10 @@ public class PickerUtil {
         }
     }
 
+    /**@title 显示三选或四选框
+     * @params 
+     * @return type 
+     **/
     public void showThreeChooseDialog(String textTile, final boolean isShowHour) {
         try {
             // 获取当前系统时间
@@ -211,6 +223,10 @@ public class PickerUtil {
         }
     }
 
+    /**@title 展示五选框
+     * @params 
+     * @return type 
+     **/
     public void showFiveChooseDialog(String textTile, final String[] arrayContent) {
         try {
             View v = inflater.inflate(R.layout.activity_five_choice, null);
@@ -255,6 +271,10 @@ public class PickerUtil {
         }
     }
 
+    /**@title 显示提示的dialog
+     * @params 
+     * @return type 
+     **/
     public void showTipDialog(Context context, String textTile) {
         try {
             final AlertDialog dialog = new AlertDialog.Builder(
