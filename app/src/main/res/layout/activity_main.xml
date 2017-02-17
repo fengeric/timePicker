@@ -17,6 +17,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:onClick="btnOnclick"
+                android:text="选择照片"
                 android:layout_height="wrap_content" />
 
             <com.umeng.test.view.MyGridView

@@ -2,10 +2,10 @@ package com.umeng.test;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -19,12 +19,12 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
-    private ChoosePhotoUtil choosePhotoUtil;
+    private ChoosePhotoUtil choosePhotoUtil;// 弹出拍照及相册弹框的公共类
     private String IMAGE_FILE_NAME = null;// 照相之后的图片的名称
-    private File file;
-    private ArrayList<String> list = new ArrayList<>();
-    private MyGridView myGridView;
-    private GridviewAdapter myAdapter;
+    private File file;//存储照片的文件夹
+    private ArrayList<String> list = new ArrayList<>();// 展示的照片的集合
+    private MyGridView myGridView;// 展示照片的控件
+    private GridviewAdapter myAdapter;// 展示照片的适配器
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         try {
             myGridView = (MyGridView) findViewById(R.id.gridview_display_image);
             myAdapter = new GridviewAdapter(this, list);
@@ -52,11 +52,11 @@ public class MainActivity extends Activity {
                 }
             });
         } catch (Exception e) {
-          LogUtil.e(getClass(), "initView", e);
+            LogUtil.e(getClass(), "initView", e);
         }
     }
 
-    public void btnOnclick(View view){
+    public void btnOnclick(View view) {
         // 创建文件夹
         file = new File(Util.photoPath);
         if (!file.exists()) {
@@ -66,7 +66,12 @@ public class MainActivity extends Activity {
         choosePhotoUtil.setCallBack(new ChoosePhotoUtil.chooseCallBack() {
             @Override
             public void onChooseAlbum() {
-
+                Intent intentFromGallery = new Intent();
+                // 设置文件类型
+                intentFromGallery.setType("image/*");
+                intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intentFromGallery,
+                        Util.CODE_GALLERY_REQUEST);
             }
 
             @Override
@@ -88,25 +93,47 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
         try {
+            String realPath = "";// 图片的绝对路径
             switch (requestCode) {
                 case Util.CODE_CAMERA_REQUEST:
                     File tempFile = new File(Util.photoPath, IMAGE_FILE_NAME);
-                    Uri uri = Uri.fromFile(tempFile);
-                    // cropRawPhoto(uri);
-                    Log.v("lala", "path:" + uri.getPath());
-                    list.add("file://" + uri.getPath());
-                    myAdapter.notifyDataSetChanged();
-
+                    Uri uri1 = Uri.fromFile(tempFile);
+                    realPath = uri1.getPath();
                     break;
-
+                case Util.CODE_GALLERY_REQUEST:
+                    Uri uri2 = intent.getData();
+                    realPath = getRealPathFromURI(uri2);
+                    break;
                 default:
+
                     break;
             }
+            list.add("file://" + realPath);
+            myAdapter.notifyDataSetChanged();
         } catch (Exception e) {
-          LogUtil.e(getClass(), "onActivityResult", e);
+            LogUtil.e(getClass(), "onActivityResult", e);
         }
     }
+
+    /**@title 获取图片的绝对路径
+     * @params 
+     * @return type 
+     **/
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
+    }
+
 }
