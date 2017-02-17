@@ -2,13 +2,13 @@ package com.umeng.test;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.umeng.test.time.ArrayWheelAdapter;
 import com.umeng.test.time.OnWheelChangedListener;
 import com.umeng.test.time.WheelView;
+import com.umeng.test.util.LogUtil;
 import com.umeng.test.util.PickerUtil;
 
 import java.util.Calendar;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception e) {
-            Log.e("lala", "btnSingleChoiceActivity" + e.toString());
+            LogUtil.e(MainActivity.class, "btnSingleChoiceActivity", e);
         }
     }
 
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception e) {
-            Log.e("lala", "btnDoubleChoiceActivity" + e.toString());
+            LogUtil.e(MainActivity.class, "btnDoubleChoiceActivity", e);
         }
     }
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception e) {
-            Log.e("lala", "btnThreeChoiceActivity" + e.toString());
+            LogUtil.e(MainActivity.class, "btnThreeChoiceActivity", e);
         }
     }
 
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception e) {
-            Log.e("lala", "btnFourChoiceActivity" + e.toString());
+            LogUtil.e(MainActivity.class, "btnFourChoiceActivity", e);
         }
     }
 
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception e) {
-            Log.e("lala", "btnFiveChoiceActivity" + e.toString());
+            LogUtil.e(PickerUtil.class, "btnFiveChoiceActivity", e);
         }
     }
     public void showTipDialog(View v) {
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception e) {
-            Log.e("lala", "showTipDialog" + e.toString());
+            LogUtil.e(MainActivity.class, "showTipDialog", e);
         }
     }
 

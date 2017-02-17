@@ -1,83 +1,90 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context="com.umeng.test.MainActivity" >
+    tools:context="com.umeng.test.MainActivity">
+
     <Button
-        android:layout_width="match_parent"
         android:id="@+id/bt_new_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="btnSingleChoiceActivity"
-        android:text="跳转到单选页面"
-        android:layout_height="wrap_content" />
+        android:text="跳转到单选页面" />
+
     <Button
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="btnDoubleChoiceActivity"
-        android:text="跳转到双选页面"
-        android:layout_height="wrap_content" />
+        android:text="跳转到双选页面" />
+
     <Button
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="btnThreeChoiceActivity"
-        android:text="跳转到三选页面"
-        android:layout_height="wrap_content" />
+        android:text="跳转到三选页面" />
+
     <Button
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="btnFourChoiceActivity"
-        android:text="跳转到四选页面"
-        android:layout_height="wrap_content" />
+        android:text="跳转到四选页面" />
+
     <Button
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="btnFiveChoiceActivity"
-        android:text="跳转到五选页面"
-        android:layout_height="wrap_content" />
+        android:text="跳转到五选页面" />
+
     <Button
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="showTipDialog"
-        android:text="展示提示框"
-        android:layout_height="wrap_content" />
+        android:text="展示提示框" />
 
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="220dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <com.umeng.test.time.WheelView
             android:id="@+id/time_year"
             android:layout_width="100dp"
-            android:scrollbars="none"
-            android:fadingEdge="none"
             android:layout_height="match_parent"
             android:layout_marginLeft="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:fadingEdge="none"
+            android:scrollbars="none" />
 
         <com.umeng.test.time.WheelView
             android:id="@+id/time_month"
             android:layout_width="80dp"
-            android:background="#ffffff"
-            android:scrollbars="none"
-            android:fadingEdge="none"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:fadingEdge="none"
+            android:scrollbars="none" />
 
         <com.umeng.test.time.WheelView
             android:id="@+id/time_day"
             android:layout_width="80dp"
-            android:scrollbars="none"
-            android:fadingEdge="none"
-            android:background="#ffffff"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:fadingEdge="none"
+            android:scrollbars="none" />
 
         <com.umeng.test.time.WheelView
             android:id="@+id/time_hour"
-            android:background="#ffffff"
-            android:scrollbars="none"
-            android:fadingEdge="none"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:fadingEdge="none"
+            android:scrollbars="none" />
     </LinearLayout>
 
 </LinearLayout>

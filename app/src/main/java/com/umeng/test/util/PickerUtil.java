@@ -3,7 +3,6 @@ package com.umeng.test.util;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +74,7 @@ public class PickerUtil {
             });
             getChooseDialog(context, v);
         } catch (Exception e) {
-            Log.e("lala", "showSingleChooseDialog" + e.toString());
+            LogUtil.e(PickerUtil.class, "showSingleChooseDialog", e);
         }
     }
 
@@ -116,7 +115,7 @@ public class PickerUtil {
             });
             getChooseDialog(context, v);
         } catch (Exception e) {
-            Log.e("lala", "showTwoChooseDialog" + e.toString());
+            LogUtil.e(PickerUtil.class, "showThreeChooseDialog", e);
         }
     }
 
@@ -208,7 +207,7 @@ public class PickerUtil {
             });
             getChooseDialog(context, v);
         } catch (Exception e) {
-            Log.e("lala", "showThreeChooseDialog" + e.toString());
+            LogUtil.e(PickerUtil.class, "showThreeChooseDialog", e);
         }
     }
 
@@ -252,7 +251,7 @@ public class PickerUtil {
             });
             getChooseDialog(context, v);
         } catch (Exception e) {
-            Log.e("lala", "showFiveChooseDialog" + e.toString());
+            LogUtil.e(PickerUtil.class, "showFiveChooseDialog", e);
         }
     }
 
@@ -290,7 +289,7 @@ public class PickerUtil {
             dialog.setView(v);
             dialog.show();;
         } catch (Exception e) {
-            Log.e("lala", "showTipDialog" + e.toString());
+            LogUtil.e(PickerUtil.class, "showTipDialog", e);
         }
     }
 
@@ -415,8 +414,7 @@ public class PickerUtil {
             window.setAttributes(wlp);
             dialog.show();
         } catch (Exception e) {
-            Log.e("lala",
-                    "nameOrHeadDialog(Context context, int who)" + e.toString());
+            LogUtil.e(PickerUtil.class, "nameOrHeadDialog(Context context, int who)", e);
         }
     }
 
@@ -426,7 +424,7 @@ public class PickerUtil {
                 dialog.dismiss();
             }
         } catch (Exception e) {
-            Log.e("lala", "dismissChooseDialog" + e.toString());
+            LogUtil.e(PickerUtil.class, "dismissChooseDialog", e);
         }
     }
 
