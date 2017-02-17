@@ -20,7 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SingleChoicActivity"></activity>
 
         <meta-data android:value="549abeb9fd98c5b9e80005e5" android:name="UMENG_APPKEY"></meta-data>
         <meta-data android:value="feng" android:name="UMENG_CHANNEL"/>
