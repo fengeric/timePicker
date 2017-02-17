@@ -18,8 +18,7 @@ import com.umeng.test.R;
 public class ChoosePhotoUtil {
     private Context context;
     private LayoutInflater inflater;
-    private loadDataCallBack callBack;
-    private pressBtCallBack pressCallBack;
+    private chooseCallBack callBack;
     private Dialog dialog = null;
 
     public ChoosePhotoUtil(Context context) {
@@ -43,20 +42,21 @@ public class ChoosePhotoUtil {
                 @Override
                 public void onClick(View v) {
                     dismissChooseDialog();
+                    callBack.onChooseAlbum();
                 }
             });
             tv_camera.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dismissChooseDialog();
-
+                    callBack.onChooseCamera();
                 }
             });
             tv_back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dismissChooseDialog();
-
+                    callBack.onChooseBack();
                 }
             });
 
@@ -98,20 +98,15 @@ public class ChoosePhotoUtil {
         }
     }
 
-    public interface loadDataCallBack {
-        public void loadDataSuccess(String result);
+    public interface chooseCallBack {
+        public void onChooseAlbum();
+        public void onChooseCamera();
+        public void onChooseBack();
     }
 
-    public void setCallBack(loadDataCallBack callBack) {
+    public void setCallBack(chooseCallBack callBack) {
         this.callBack = callBack;
     }
 
-    public interface pressBtCallBack {
-        public void pressSuccess(boolean isPressYes);
-    }
-
-    public void setCallBack(pressBtCallBack callBack) {
-        this.pressCallBack = callBack;
-    }
 
 }

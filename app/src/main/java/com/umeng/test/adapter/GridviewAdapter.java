@@ -59,9 +59,6 @@ public class GridviewAdapter extends BaseAdapter {
 			holder = (MyHolder) convertView.getTag();
 		}
 		img_url = list_img.get(position);
-		// if (img_url.contains(HttpUrlNew.HTTP_DOMAIN)) {
-		//	img_url = "http://" + img_url;
-		// }
 		imageLoad.loadImage(holder.iv_img, img_url);
 		return convertView;
 	}
