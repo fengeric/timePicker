@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
         initView();
     }
 
+    // 初始化
     private void initView() {
         try {
             myGridView = (MyGridView) findViewById(R.id.gridview_display_image);
