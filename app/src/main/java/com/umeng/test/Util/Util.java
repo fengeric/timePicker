@@ -2,7 +2,6 @@ package com.umeng.test.Util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Environment;
 
 import com.umeng.test.R;
 
@@ -11,8 +10,6 @@ import com.umeng.test.R;
  */
 
 public class Util {
-    public static final String photoPath = Environment.getExternalStorageDirectory()
-            + "/com.okCombo";// 图片文件夹所在路径
     public static final int CODE_GALLERY_REQUEST = 0xa0;
     public static final int CODE_CAMERA_REQUEST = 0xa1;
     public static final int CODE_RESULT_REQUEST = 0xa2;
