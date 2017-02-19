@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="delete_file_name" type="id"></item>
+    <item name="convert_view_obj" type="id"></item>
+    <item name="tag_day" type="id"></item>
+</resources>
