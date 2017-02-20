@@ -27,24 +27,13 @@
         <activity android:name=".MyImageViewActivity"></activity>
 
         <activity
-            android:name="com.photoselector.ui.PhotoSelectorActivity"
-            android:label="图片选择" >
+            android:name=".photoSelector.ui.PhotoSelectorActivity">
         </activity>
         <activity
-            android:name="com.photoselector.ui.PhotoPreviewActivity"
-            android:label="图片预览" >
+            android:name=".photoSelector.ui.BasePhotoPreviewActivity">
         </activity>
         <activity
-            android:name="com.photeselector.activity.CuttingsPhotoActivity"
-            android:label="截取图片" >
-        </activity>
-        <activity
-            android:name="com.photoselector.ui.PhotoSelectorPreview"
-            android:label="点击图片" >
-        </activity>
-        <activity
-            android:name="com.photeselector.activity.MyImageViewActivity"
-            android:label="点击图片" >
+            android:name=".photoSelector.ui.PhotoPreviewActivity">
         </activity>
 
         <meta-data android:value="549abeb9fd98c5b9e80005e5" android:name="UMENG_APPKEY"></meta-data>

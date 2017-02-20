@@ -81,7 +81,7 @@
             android:horizontalSpacing="@dimen/sticky_item_horizontalSpacing"
             android:numColumns="3"
             android:stretchMode="columnWidth"
-            android:scrollbars="@null"
+            android:scrollbars="none"
             android:verticalSpacing="@dimen/sticky_item_verticalSpacing" />
 
         <RelativeLayout
