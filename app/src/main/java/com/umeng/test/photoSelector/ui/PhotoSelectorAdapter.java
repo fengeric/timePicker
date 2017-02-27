@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.umeng.test.R;
 import com.umeng.test.photoSelector.model.PhotoModel;
-import com.umeng.test.photoSelector.util.CommonUtils;
 
 import java.util.ArrayList;
 

@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.umeng.test.R;
 import com.umeng.test.photoSelector.model.PhotoModel;
-import com.umeng.test.photoSelector.util.AnimationUtil;
 
 import java.util.List;
 

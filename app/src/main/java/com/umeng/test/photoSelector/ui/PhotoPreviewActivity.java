@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.umeng.test.photoSelector.domain.PhotoSelectorDomain;
 import com.umeng.test.photoSelector.model.PhotoModel;
-import com.umeng.test.photoSelector.util.CommonUtils;
 
 import java.util.List;
 

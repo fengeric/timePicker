@@ -27,8 +27,6 @@ import com.umeng.test.photoSelector.domain.PhotoSelectorDomain;
 import com.umeng.test.photoSelector.model.AlbumModel;
 import com.umeng.test.photoSelector.model.IntentConstants;
 import com.umeng.test.photoSelector.model.PhotoModel;
-import com.umeng.test.photoSelector.util.AnimationUtil;
-import com.umeng.test.photoSelector.util.CommonUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -241,7 +239,7 @@ public class PhotoSelectorActivity extends Activity implements
 		if (TOTAL_SELECTED_PIC >= 1) {
 			if (TOTAL_SELECTED_PIC > MAX_PIC) {
 				Toast.makeText(getApplicationContext(), "最多只能上传" + MAX_PIC
-						+ "张图片", 0).show();
+						+ "张图片", Toast.LENGTH_LONG).show();
 				buttonView.setChecked(!buttonView.isChecked());
 				// buttonView.setEnabled(buttonView.isChecked());
 				return;

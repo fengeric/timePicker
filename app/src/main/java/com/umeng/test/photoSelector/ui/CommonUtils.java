@@ -1,4 +1,4 @@
-package com.umeng.test.photoSelector.util;
+package com.umeng.test.photoSelector.ui;
 
 import android.app.Activity;
 import android.content.Context;

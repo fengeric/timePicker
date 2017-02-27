@@ -7,8 +7,6 @@ import android.widget.GridView;
 /**
  * 重写GridView
  * 
- * @author Dragonfly
- * 
  */
 public class MyGridView extends GridView {
 

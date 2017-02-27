@@ -1,4 +1,4 @@
-package com.umeng.test.photoSelector.util;
+package com.umeng.test.photoSelector.ui;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
