@@ -68,7 +68,7 @@ public class WheelView extends View {
 			0x00eeeeee, 0x00eeeeee };
 
 	/** item高度Additional items height (is added to standard text item height) */
-	private static final int ADDITIONAL_ITEM_HEIGHT = 65;
+	private int ADDITIONAL_ITEM_HEIGHT = 0;
 
 	/** 文字大小Text size */
 	private static final int TEXT_SIZE = 40;
@@ -168,6 +168,7 @@ public class WheelView extends View {
 		gestureDetector.setIsLongpressEnabled(false);
 		
 		scroller = new Scroller(context);
+		ADDITIONAL_ITEM_HEIGHT = transferHeight(context, 37.33f);
 	}
 	
 	/**
@@ -942,6 +943,17 @@ public class WheelView extends View {
 		scroller.startScroll(0, lastScrollY, 0, offset - lastScrollY, time);
 		setNextMessage(MESSAGE_SCROLL);
 		startScrolling();
+	}
+
+	/**
+	 * 根据手机的分辨率调整距离顶部的距离
+	 * (3,77.33),(2.75,66),(2,40),根据这几个点得出直线方程y=37.33x - 34.66
+	 * x是手机分辨率,y是不同分别率手机选框里文字显示在中间所需的值
+	 * */
+	public static int transferHeight(Context context, float dpValue) {
+		final float scale = context.getResources().getDisplayMetrics().density;
+		// LogUtil.v(WheelView.class, "transferHeight---" + "scale:" + scale + ",value:" + (dpValue * scale - 34.66) + "\n" + "---------------------");
+		return (int) (dpValue * scale - 34.66);
 	}
 
 }
