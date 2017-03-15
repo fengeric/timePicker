@@ -23,6 +23,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.umeng.test.R;
+import com.umeng.test.Util.Util;
 import com.umeng.test.photoSelector.domain.PhotoSelectorDomain;
 import com.umeng.test.photoSelector.model.AlbumModel;
 import com.umeng.test.photoSelector.model.IntentConstants;
@@ -53,7 +54,8 @@ public class PhotoSelectorActivity extends Activity implements
 
 	private static String picFileFullName;// 照片路径
 
-	private static final int MAX_PIC = 8;// 最多上传10张
+	// private static final int MAX_PIC = 8;// 最多上传10张
+	private int MAX_PIC;// 最多上传的图片数量
 	private int TOTAL_SELECTED_PIC;// 已经选择的图片数量
 
 	@Override
@@ -61,6 +63,8 @@ public class PhotoSelectorActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
 		setContentView(R.layout.activity_photoselector);
+
+		MAX_PIC = getIntent().getExtras().getInt(Util.INTENT_MAX_PIC_KEY);
 
 		DisplayImageOptions defaultDisplayImageOptions = new DisplayImageOptions.Builder() //
 				.considerExifParams(true) // 调整图片方向

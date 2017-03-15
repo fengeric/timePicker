@@ -9,8 +9,10 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.umeng.test.Util.LogUtil;
+import com.umeng.test.Util.Util;
 import com.umeng.test.adapter.GridviewAdapter;
 import com.umeng.test.photoSelector.model.IntentConstants;
 import com.umeng.test.photoSelector.model.PhotoModel;
@@ -20,7 +22,8 @@ import com.umeng.test.view.MyGridView;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
-    private ArrayList<String> list = new ArrayList<>();// 展示的照片的集合
+    private ArrayList<String> list_img_display = new ArrayList<>();// 展示的照片的集合(带有上传图片按钮)
+    private ArrayList<String> list_img_preview = new ArrayList<>();// 展示的预览的照片的集合(不带有上传图片按钮)
     private MyGridView myGridView;// 展示照片的控件
     private GridviewAdapter myAdapter;// 展示照片的适配器
     private final int CAMREA_RESQUSET = 1;
@@ -37,7 +40,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         up_picture_url = "drawable://" + R.drawable.up_photo;
-        list.add(up_picture_url);
+        list_img_display.add(up_picture_url);
         initView();
     }
 
@@ -45,23 +48,89 @@ public class MainActivity extends Activity {
     private void initView() {
         try {
             myGridView = (MyGridView) findViewById(R.id.gridview_display_image);
-            myAdapter = new GridviewAdapter(this, list);
+            myAdapter = new GridviewAdapter(this, list_img_display);
             myGridView.setAdapter(myAdapter);
-            myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /*myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    /*Intent in = new Intent(MainActivity.this, MyImageViewActivity.class);
+                    Intent in = new Intent(MainActivity.this, MyImageViewActivity.class);
                     in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     in.putExtra("pos", position);
                     in.putExtra("list", list);
                     startActivity(in);
-                    Util.ActivitySkip(MainActivity.this);*/
+                    Util.ActivitySkip(MainActivity.this);
 
+                }
+            });*/
+            myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    int add_index = -1;// 加号的位置
+                    for (int i = 0; i < list_img_display.size(); i++) {
+                        if (list_img_display.get(i).contains("drawable://")) {
+                            add_index = i;
+                        }
+                    }
+                    // 只要加号的位置不等于-1，就证明存在加号
+                    if (add_index != -1) {
+                        // 如果该item是加号，那么点击去本地相册添加图片
+                        if (position == add_index) {
+                            if (judgeImageListSize() == Util.MAX_PIC) {
+                                Toast.makeText(MainActivity.this, "最多只能上传" + Util.MAX_PIC + "张图片",Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                            Intent intent = new Intent();
+                            intent.setClass(getApplicationContext(),
+                                    PhotoSelectorActivity.class);
+                            intent.putExtra(Util.INTENT_MAX_PIC_KEY,
+                                    Util.MAX_PIC - judgeImageListSize());
+                            /*intent.putExtra(
+                                    IntentConstants.EXTRA_CAN_ADD_IMAGE_SIZE,
+                                    availableSize);*/
+                            startActivityForResult(intent,
+                                    REQUEST_CODE_GETPHOTO);
+                        } else {
+                            // 如果该item不是加号，那么点击预览图片
+                            previewPic(position);
+                        }
+                    } else {
+                        // 如果该item不是加号，那么点击预览图片
+                        previewPic(position);
+                    }
+                }
+
+                // 预览图片
+                private void previewPic(int position) {
+                    Intent in = new Intent(MainActivity.this, MyImageViewActivity.class);
+                    in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    in.putExtra("pos", position);
+                    in.putExtra("list", list_img_preview);
+                    startActivity(in);
+                    Util.ActivitySkip(MainActivity.this);
                 }
             });
         } catch (Exception e) {
             LogUtil.e(getClass(), "initView", e);
         }
+    }
+
+    /**
+     * 判断已经上传了多少图片
+     *
+     * @return
+     */
+    private int judgeImageListSize() {
+        int size = 0;
+        try {
+            if (list_img_display != null && list_img_display.size() > 1) {
+                size = list_img_display.size() - 1;
+            }
+        } catch (Exception e) {
+            LogUtil.e(getClass(), "judgeImageListSize()", e);
+        }
+        return size;
     }
 
     public void btnOnclick(View view) {
@@ -78,21 +147,23 @@ public class MainActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, intent);
         try {
             if (requestCode == CAMREA_RESQUSET && resultCode == RESULT_OK) {
-                photos = (ArrayList<PhotoModel>) intent
+                /*photos = (ArrayList<PhotoModel>) intent
                         .getSerializableExtra(IntentConstants.EXTRA_IMAGE_LIST);
                 Log.v("lala", "--a1--" + photos.get(0).getOriginalPath());
-                list.add("file://" + photos.get(0).getOriginalPath());
+                list_img_display.add("file://" + photos.get(0).getOriginalPath());*/
+                setPhotos(intent);
                 // setBitmap(camerPhoto.sdPath + "/" + camerPhoto.photo);
                 // startUpPic(camerPhoto.sdPath + "/" + camerPhoto.photo);
                 // clipImageFromLocal(camerPhoto.sdPath + "/" + camerPhoto.photo);
             } else if (requestCode == REQUEST_CODE_GETPHOTO
                     && resultCode == RESULT_OK) {
-                photos = (ArrayList<PhotoModel>) intent
+                /*photos = (ArrayList<PhotoModel>) intent
                         .getSerializableExtra(IntentConstants.EXTRA_IMAGE_LIST);
                 for (int i = 0; i < photos.size(); i++) {
-                    list.add("file://" + photos.get(i).getOriginalPath());
+                    list_img_display.add("file://" + photos.get(i).getOriginalPath());
                 }
-                Log.v("lala", "--a2--" + photos.get(0).getOriginalPath());
+                Log.v("lala", "--a2--" + photos.get(0).getOriginalPath());*/
+                setPhotos(intent);
                 // clipImageFromLocal(photos.get(0).getOriginalPath());
             } else if (requestCode == PHOTOZOOM) {
                 String path = getImagePath(intent);
@@ -105,6 +176,27 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             LogUtil.e(getClass(), "onActivityResult", e);
         }
+    }
+
+    private void setPhotos(Intent in){
+        try {
+            photos = (ArrayList<PhotoModel>) in
+                    .getSerializableExtra(IntentConstants.EXTRA_IMAGE_LIST);
+            list_img_display.remove(list_img_display.size() - 1);
+            for (int i = 0; i < photos.size(); i++) {
+                list_img_display.add("file://" + photos.get(i).getOriginalPath());
+                list_img_preview.add("file://" + photos.get(i).getOriginalPath());
+            }
+            addIconRefreshAdpater();
+        } catch (Exception e) {
+          LogUtil.e(getClass(), "setPhotos", e);
+        }
+    }
+
+    // 添加加号，刷新适配器
+    private void addIconRefreshAdpater() {
+        list_img_display.add(up_picture_url);
+        myAdapter.notifyDataSetChanged();
     }
 
     private String getImagePath(Intent data) {

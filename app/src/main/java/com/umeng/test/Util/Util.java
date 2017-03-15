@@ -13,6 +13,10 @@ public class Util {
     public static final int CODE_GALLERY_REQUEST = 0xa0;
     public static final int CODE_CAMERA_REQUEST = 0xa1;
     public static final int CODE_RESULT_REQUEST = 0xa2;
+
+    public static final int MAX_PIC = 10;// 最多上传的图片数量
+    public static final String INTENT_MAX_PIC_KEY = "max_pic";
+
     public static void ActivitySkip(Context context) {
         try {
             ((Activity) context).overridePendingTransition(
