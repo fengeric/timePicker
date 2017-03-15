@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.umeng.test.Util.LogUtil;
-import com.umeng.test.Util.Util;
 import com.umeng.test.adapter.GridviewAdapter;
 import com.umeng.test.photoSelector.model.IntentConstants;
 import com.umeng.test.photoSelector.model.PhotoModel;
@@ -24,13 +23,12 @@ public class MainActivity extends Activity {
     private ArrayList<String> list = new ArrayList<>();// 展示的照片的集合
     private MyGridView myGridView;// 展示照片的控件
     private GridviewAdapter myAdapter;// 展示照片的适配器
-
-
     private final int CAMREA_RESQUSET = 1;
     private final int REQUEST_CODE_GETPHOTO = 102;
     private ArrayList<PhotoModel> photos;
     public static final int PHOTOZOOM = 2; // 缩放
     public static final String IMAGE_UNSPECIFIED = "image/*";
+    private String up_picture_url = "";
 
 
     @Override
@@ -38,6 +36,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        up_picture_url = "drawable://" + R.drawable.up_photo;
+        list.add(up_picture_url);
         initView();
     }
 
@@ -50,12 +50,13 @@ public class MainActivity extends Activity {
             myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent in = new Intent(MainActivity.this, MyImageViewActivity.class);
+                    /*Intent in = new Intent(MainActivity.this, MyImageViewActivity.class);
                     in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     in.putExtra("pos", position);
                     in.putExtra("list", list);
                     startActivity(in);
-                    Util.ActivitySkip(MainActivity.this);
+                    Util.ActivitySkip(MainActivity.this);*/
+
                 }
             });
         } catch (Exception e) {

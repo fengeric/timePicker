@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#cccccc"
     tools:context="com.umeng.test.MainActivity">
 
     <ScrollView
@@ -18,6 +19,7 @@
                 android:layout_width="match_parent"
                 android:onClick="btnOnclick"
                 android:text="选择照片"
+                android:visibility="gone"
                 android:layout_height="wrap_content" />
 
             <com.umeng.test.view.MyGridView
