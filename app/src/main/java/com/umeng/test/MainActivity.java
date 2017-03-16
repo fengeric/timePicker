@@ -90,6 +90,12 @@ public class MainActivity extends Activity implements ImageDelCallBack{
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
+
+                    if (isShowDelete) {
+                        isShowDelete = false;
+                        myAdapter.setIsShowDelete(isShowDelete);
+                    }
+
                     int add_index = -1;// 加号的位置
                     for (int i = 0; i < list_img_display.size(); i++) {
                         if (list_img_display.get(i).contains("drawable://")) {
