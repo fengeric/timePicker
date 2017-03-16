@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.umeng.test.Util.LogUtil;
 import com.umeng.test.Util.Util;
 import com.umeng.test.adapter.GridviewAdapter;
+import com.umeng.test.inter.ImageDelCallBack;
 import com.umeng.test.photoSelector.model.IntentConstants;
 import com.umeng.test.photoSelector.model.PhotoModel;
 import com.umeng.test.photoSelector.ui.PhotoSelectorActivity;
@@ -21,7 +22,7 @@ import com.umeng.test.view.MyGridView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements ImageDelCallBack{
     private ArrayList<String> list_img_display = new ArrayList<>();// 展示的照片的集合(带有上传图片按钮)
     private ArrayList<String> list_img_preview = new ArrayList<>();// 展示的预览的照片的集合(不带有上传图片按钮)
     private MyGridView myGridView;// 展示照片的控件
@@ -32,6 +33,7 @@ public class MainActivity extends Activity {
     public static final int PHOTOZOOM = 2; // 缩放
     public static final String IMAGE_UNSPECIFIED = "image/*";
     private String up_picture_url = "";
+    private boolean isShowDelete = false;
 
 
     @Override
@@ -48,20 +50,42 @@ public class MainActivity extends Activity {
     private void initView() {
         try {
             myGridView = (MyGridView) findViewById(R.id.gridview_display_image);
-            myAdapter = new GridviewAdapter(this, list_img_display);
+            myAdapter = new GridviewAdapter(this, list_img_display, this);
             myGridView.setAdapter(myAdapter);
-            /*myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            myGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent in = new Intent(MainActivity.this, MyImageViewActivity.class);
-                    in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    in.putExtra("pos", position);
-                    in.putExtra("list", list);
-                    startActivity(in);
-                    Util.ActivitySkip(MainActivity.this);
-
+                public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+                    if (position != list_img_display.size() - 1) {// 不是上传按钮时
+                        /*final ImageView iv_del = (ImageView) view.findViewById(R.id.iv_img_del);
+                        // int tagId = (Integer) view.getTag(R.id.visible_id);
+                        if (view.getTag(R.id.visible_id) != null) {
+                            iv_del.setVisibility(View.GONE);
+                            // view.setTag(R.id.visible_id, 2);
+                            view.setTag(R.id.visible_id, null);
+                        } else {
+                            iv_del.setVisibility(View.VISIBLE);
+                            view.setTag(R.id.visible_id, 1);
+                        }
+                        iv_del.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                iv_del.setVisibility(View.GONE);
+                                view.setTag(R.id.visible_id, null);
+                                list_img_display.remove(position);
+                                list_img_preview.remove(position);
+                                myAdapter.notifyDataSetChanged();
+                            }
+                        });*/
+                        if (isShowDelete) {
+                            isShowDelete = false;
+                        } else {
+                            isShowDelete = true;
+                        }
+                        myAdapter.setIsShowDelete(isShowDelete);
+                    }
+                    return false;
                 }
-            });*/
+            });
             myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
@@ -86,9 +110,6 @@ public class MainActivity extends Activity {
                                     PhotoSelectorActivity.class);
                             intent.putExtra(Util.INTENT_MAX_PIC_KEY,
                                     Util.MAX_PIC - judgeImageListSize());
-                            /*intent.putExtra(
-                                    IntentConstants.EXTRA_CAN_ADD_IMAGE_SIZE,
-                                    availableSize);*/
                             startActivityForResult(intent,
                                     REQUEST_CODE_GETPHOTO);
                         } else {
@@ -220,5 +241,12 @@ public class MainActivity extends Activity {
             LogUtil.e(getClass(), "getImagePath", e);
             return path;
         }
+    }
+
+    @Override
+    public void onImageDelCallBack(int position) {
+        list_img_display.remove(position);
+        list_img_preview.remove(position);
+        myAdapter.notifyDataSetChanged();
     }
 }
