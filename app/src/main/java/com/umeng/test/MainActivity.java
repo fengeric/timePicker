@@ -82,7 +82,7 @@ public class MainActivity extends Activity implements ImageDelCallBack{
                         }
                         myAdapter.setIsShowDelete(isShowDelete);
                     }
-                    return false;
+                    return true;
                 }
             });
             myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
