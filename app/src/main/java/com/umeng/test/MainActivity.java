@@ -29,11 +29,10 @@ public class MainActivity extends Activity implements ImageDelCallBack{
     private GridviewAdapter myAdapter;// 展示照片的适配器
     private final int CAMREA_RESQUSET = 1;
     private final int REQUEST_CODE_GETPHOTO = 102;
-    private ArrayList<PhotoModel> photos;
     public static final int PHOTOZOOM = 2; // 缩放
     public static final String IMAGE_UNSPECIFIED = "image/*";
-    private String up_picture_url = "";
-    private boolean isShowDelete = false;
+    private String up_picture_url = "";// 上传图片的地址
+    private boolean isShowDelete = false;// 是否显示图片右上角删除按钮
 
 
     @Override
@@ -201,7 +200,7 @@ public class MainActivity extends Activity implements ImageDelCallBack{
 
     private void setPhotos(Intent in){
         try {
-            photos = (ArrayList<PhotoModel>) in
+            ArrayList<PhotoModel> photos = (ArrayList<PhotoModel>) in
                     .getSerializableExtra(IntentConstants.EXTRA_IMAGE_LIST);
             list_img_display.remove(list_img_display.size() - 1);
             for (int i = 0; i < photos.size(); i++) {
