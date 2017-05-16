@@ -23,7 +23,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.umeng.test.R;
-import com.umeng.test.Util.Util;
+import com.umeng.test.util.Util;
 import com.umeng.test.photoSelector.domain.PhotoSelectorDomain;
 import com.umeng.test.photoSelector.model.AlbumModel;
 import com.umeng.test.photoSelector.model.IntentConstants;

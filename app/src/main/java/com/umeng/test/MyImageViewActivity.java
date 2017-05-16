@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.umeng.test.Util.ImageLoad;
-import com.umeng.test.Util.LogUtil;
-import com.umeng.test.Util.Util;
+import com.umeng.test.util.ImageLoad;
+import com.umeng.test.util.LogUtil;
+import com.umeng.test.util.Util;
 import com.umeng.test.view.TouchImageView;
 
 import java.util.ArrayList;

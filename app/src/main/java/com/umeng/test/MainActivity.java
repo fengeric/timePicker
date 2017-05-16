@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.umeng.test.Util.LogUtil;
-import com.umeng.test.Util.Util;
+import com.umeng.test.util.LogUtil;
+import com.umeng.test.util.Util;
 import com.umeng.test.adapter.GridviewAdapter;
 import com.umeng.test.inter.ImageDelCallBack;
 import com.umeng.test.photoSelector.model.IntentConstants;
