@@ -1,4 +1,4 @@
-package com.umeng.test.Util;
+package com.umeng.test.util;
 
 import android.app.Dialog;
 import android.content.Context;

@@ -9,9 +9,9 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.umeng.test.Util.ChoosePhotoUtil;
-import com.umeng.test.Util.LogUtil;
-import com.umeng.test.Util.Util;
+import com.umeng.test.util.ChoosePhotoUtil;
+import com.umeng.test.util.LogUtil;
+import com.umeng.test.util.Util;
 import com.umeng.test.adapter.GridviewAdapter;
 import com.umeng.test.view.MyGridView;
 

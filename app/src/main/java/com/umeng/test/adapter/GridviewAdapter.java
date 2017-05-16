@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.umeng.test.R;
-import com.umeng.test.Util.ImageLoad;
+import com.umeng.test.util.ImageLoad;
 
 import java.util.ArrayList;
 
